@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<meta name="renderer" content="webkit"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+	<title></title>
+	<style type="text/css">
+	    *{
+	    	margin: 0;
+	    	padding: 0;
+	    	list-style: none;
+	    }
+	    body,html{
+	    	height: 100%;
+	    }
+		.hamster{
+			width: 25vw;height: 25vw;
+			background: url(ds.png) no-repeat center center/cover;
+		}
+		.hamster_box{
+			width: 100vw;
+			height: 100vh;
+			/*background: #FFF8DC;*/
+			background: url(bj0.jpg) no-repeat center center/cover;
+			box-sizing: border-box;
+			padding: 35px 10px 10px;
+		}
+		.hamster_box h2,.hamster_box p{
+			text-align: center;
+			line-height: 40px;
+		}
+		.hamster_ul{
+			width: 75vw;
+			height: 75vw;
+			margin: 10px auto;
+		}
+		.hamster_ul li{
+			width: 25vw;
+			height: 25vw;
+			float: left;
+			background: rgba(219, 227, 49, 0.5);
+			box-sizing: border-box;
+			border: 2px solid #fff;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+	<div class="hamster_box">
+		<h2 style="font-size: 28px;color: #f40;">打地鼠</h2>
+		<p>得分： <span class="Fraction">0</span></p>
+		<p>剩余时间： <span class="hamster_time"></span></p>
+		<ul class="hamster_ul">
+			<li>
+			</li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>	
+	</div>
+</body>
+</html>
+	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+<script type="text/javascript">
+	var Hamster={
+		obj:null,
+		time:20,
+		Fraction:0,
+		speed:1,
+		num:0,
+		Init:function(){
+			this.obj=$('.hamster_ul');
+		}
+	}
+	var flag=true;
+	Hamster.Init();
+	$('body').on('click','.hamster_ul li',function(){
+		if($(this).html()!='' &&flag){
+			Hamster.Fraction++;
+			$(this).html('');
+			$('.Fraction').html(Hamster.Fraction);
+		}
+	})
+	function Creat(argument) {
+	 	var num=Math.floor(Math.random()*9);
+		while(Hamster.num==num){
+	 		 num=Math.floor(Math.random()*9);
+		}
+		Hamster.num=num;
+		var inner='<div class="hamster"></div>';
+		$('.hamster_ul').find('li').html('');
+		$('.hamster_ul').find('li').eq(num).html(inner);
+	 } 
+	var t;
+	t=setInterval(Creat,1200);
+	$('.hamster_time').html('20');
+	var t2,time=21;
+	t2=setInterval(function(){
+		if(time==1){
+			flag=false;
+			clearInterval(t2);
+			clearInterval(t);
+		}
+		time--
+		$('.hamster_time').html(time);
+	},1000);
+	
+</script>
